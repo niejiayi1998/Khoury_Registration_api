@@ -106,7 +106,7 @@ class CourseList(generics.ListCreateAPIView):
 
 class CourseDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Course.objects.all()
-    serializer_class = serializers.CourseSerializer
+    serializer_class = serializers.CourseDetailSerializer
 
 
 class SectionList(generics.ListCreateAPIView):
@@ -116,7 +116,7 @@ class SectionList(generics.ListCreateAPIView):
 
 class SectionDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Section.objects.all()
-    serializer_class = serializers.SectionSerializer
+    serializer_class = serializers.SectionDetailSerializer
 
 
 class TicketStatusList(generics.ListCreateAPIView):
@@ -131,7 +131,7 @@ class TicketList(generics.ListCreateAPIView):
 
 class TicketDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Ticket.objects.all()
-    serializer_class = serializers.TicketSerializer
+    serializer_class = serializers.TicketDetailSerializer
 
 
 class HistoryStatusList(generics.ListCreateAPIView):
@@ -146,7 +146,7 @@ class HistoryList(generics.ListCreateAPIView):
 
 class HistoryDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.History.objects.all()
-    serializer_class = serializers.HistorySerializer
+    serializer_class = serializers.HistoryDetailSerializer
 
 
 class MessageList(generics.ListCreateAPIView):
@@ -156,4 +156,4 @@ class MessageList(generics.ListCreateAPIView):
 
 class MessageDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Message.objects.all()
-    serializer_class = serializers.MessageSerializer
+    serializer_class = serializers.MessageDetailSerializer

@@ -36,10 +36,22 @@ class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Course
         fields = ['id', 'department', 'name', 'credit']
+
+
+class CourseDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Course
+        fields = ['id', 'department', 'name', 'credit']
         depth = 1
 
 
 class SectionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Section
+        fields = ['id', 'course', 'name', 'instructor', 'classSize', 'term']
+
+
+class SectionDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Section
         fields = ['id', 'course', 'name', 'instructor', 'classSize', 'term']
@@ -56,6 +68,12 @@ class TicketSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Ticket
         fields = ['id', 'student', 'section', 'created_time', 'status']
+
+
+class TicketDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Ticket
+        fields = ['id', 'student', 'section', 'created_time', 'status']
         depth = 1
 
 
@@ -69,10 +87,23 @@ class HistorySerializer(serializers.ModelSerializer):
     class Meta:
         model = models.History
         fields = ['id', 'student', 'section', 'status']
+
+
+
+class HistoryDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.History
+        fields = ['id', 'student', 'section', 'status']
         depth = 1
 
 
 class MessageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Message
+        fields = ['id', 'student', 'advisor', 'send_time', 'content']
+
+
+class MessageDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Message
         fields = ['id', 'student', 'advisor', 'send_time', 'content']
