@@ -13,6 +13,18 @@ class Grade(models.Model):
         return self.title
 
 
+# Term Model
+class Term(models.Model):
+    title = models.CharField(max_length=100)
+
+    class Meta:
+        db_table = 'term'
+        verbose_name_plural = "terms"
+
+    def __str__(self):
+        return self.title
+
+
 # Student Model
 class Student(models.Model):
     full_name = models.CharField(max_length=100)
@@ -88,15 +100,14 @@ class Section(models.Model):
     name = models.CharField(max_length=1)
     instructor = models.CharField(max_length=150)
     classSize = models.IntegerField()
-    term = models.IntegerField()
-    year = models.IntegerField()
+    term = models.ForeignKey(Term, on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'section'
         verbose_name_plural = "Sections"
 
     def __str__(self):
-        return f"{self.course}-{self.name}-{self.year}-{self.term}"
+        return f"{self.course}-{self.name}-{self.term}"
 
 
 # Ticket Status

@@ -12,6 +12,11 @@ class GradeList(generics.ListCreateAPIView):
     serializer_class = serializers.GradeSerializer
 
 
+class TermList(generics.ListCreateAPIView):
+    queryset = models.Term.objects.all()
+    serializer_class = serializers.TermSerializer
+
+
 class StudentList(generics.ListCreateAPIView):
     queryset = models.Student.objects.all()
     serializer_class = serializers.StudentSerializer
@@ -20,6 +25,22 @@ class StudentList(generics.ListCreateAPIView):
 class StudentDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Student.objects.all()
     serializer_class = serializers.StudentSerializer
+
+
+@csrf_exempt
+def student_login(request):
+    email = request.POST['email']
+    password = request.POST['password']
+    try:
+        studentData = models.Student.objects.get(email=email,
+                                                 password=password)
+    except models.Student.DoesNotExist:
+        studentData = None
+
+    if studentData:
+        return JsonResponse({'bool': True, 'student_id': studentData.id})
+    else:
+        return JsonResponse({'bool': False})
 
 
 class AdvisorList(generics.ListCreateAPIView):
@@ -32,6 +53,22 @@ class AdvisorDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = serializers.AdvisorSerializer
 
 
+@csrf_exempt
+def advisor_login(request):
+    email = request.POST['email']
+    password = request.POST['password']
+    try:
+        advisorData = models.Advisor.objects.get(email=email,
+                                                 password=password)
+    except models.Student.DoesNotExist:
+        advisorData = None
+
+    if advisorData:
+        return JsonResponse({'bool': True, 'advisor_id': advisorData.id})
+    else:
+        return JsonResponse({'bool': False})
+
+
 class AdminList(generics.ListCreateAPIView):
     queryset = models.Admin.objects.all()
     serializer_class = serializers.AdminSerializer
@@ -40,6 +77,21 @@ class AdminList(generics.ListCreateAPIView):
 class AdminDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Admin.objects.all()
     serializer_class = serializers.AdminSerializer
+
+
+@csrf_exempt
+def admin_login(request):
+    email = request.POST['email']
+    password = request.POST['password']
+    try:
+        adminData = models.Admin.objects.get(email=email, password=password)
+    except models.Student.DoesNotExist:
+        adminData = None
+
+    if adminData:
+        return JsonResponse({'bool': True, 'admin_id': adminData.id})
+    else:
+        return JsonResponse({'bool': False})
 
 
 class DepartmentList(generics.ListCreateAPIView):

@@ -3,14 +3,20 @@ from . import views
 
 urlpatterns = [
     path('grade/', views.GradeList.as_view()),
+    path('term/', views.TermList.as_view()),
 
     # user url
-    path('student/', views.StudentList.as_view()),
-    path('student/<int:pk>/', views.StudentDetail.as_view()),
-    path('advisor/', views.AdvisorList.as_view()),
-    path('advisor/<int:pk>/', views.AdvisorDetail.as_view()),
     path('admin/', views.AdminList.as_view()),
     path('admin/<int:pk>/', views.AdminDetail.as_view()),
+    path('admin-login', views.admin_login),
+
+    path('advisor/', views.AdvisorList.as_view()),
+    path('advisor/<int:pk>/', views.AdvisorDetail.as_view()),
+    path('advisor-login', views.advisor_login),
+
+    path('student/', views.StudentList.as_view()),
+    path('student/<int:pk>/', views.StudentDetail.as_view()),
+    path('student-login', views.student_login),
 
     # course-section url
     path('department/', views.DepartmentList.as_view()),

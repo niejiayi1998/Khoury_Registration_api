@@ -8,6 +8,12 @@ class GradeSerializer(serializers.ModelSerializer):
         fields = ['id', 'title']
 
 
+class TermSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Term
+        fields = ['id', 'title']
+
+
 class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Student
@@ -43,8 +49,7 @@ class CourseSerializer(serializers.ModelSerializer):
 class SectionSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Section
-        fields = ['id', 'course', 'name', 'instructor', 'classSize', 'term',
-                  'year']
+        fields = ['id', 'course', 'name', 'instructor', 'classSize', 'term']
         depth = 1
 
 
