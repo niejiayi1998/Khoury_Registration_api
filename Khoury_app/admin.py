@@ -3,7 +3,6 @@ from . import models
 
 
 # Register your models here.
-admin.site.register(models.Grade)
 admin.site.register(models.Term)
 admin.site.register(models.Student)
 admin.site.register(models.Advisor)

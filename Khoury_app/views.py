@@ -7,11 +7,6 @@ from . import models
 
 
 # Create your views here.
-class GradeList(generics.ListCreateAPIView):
-    queryset = models.Grade.objects.all()
-    serializer_class = serializers.GradeSerializer
-
-
 class TermList(generics.ListCreateAPIView):
     queryset = models.Term.objects.all()
     serializer_class = serializers.TermSerializer

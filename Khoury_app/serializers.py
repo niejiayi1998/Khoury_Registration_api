@@ -2,12 +2,6 @@ from rest_framework import serializers
 from . import models
 
 
-class GradeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.Grade
-        fields = ['id', 'title']
-
-
 class TermSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Term
@@ -17,8 +11,7 @@ class TermSerializer(serializers.ModelSerializer):
 class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Student
-        fields = ['id', 'full_name', 'email', 'password', 'grade', 'GPA']
-        depth = 1
+        fields = ['id', 'full_name', 'email', 'password', 'GPA']
 
 
 class AdvisorSerializer(serializers.ModelSerializer):

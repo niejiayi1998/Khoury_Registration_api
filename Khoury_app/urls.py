@@ -2,7 +2,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('grade/', views.GradeList.as_view()),
     path('term/', views.TermList.as_view()),
 
     # user url

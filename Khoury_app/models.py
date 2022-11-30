@@ -1,18 +1,6 @@
 from django.db import models
 
 
-# Grade Model
-class Grade(models.Model):
-    title = models.CharField(max_length=100)
-
-    class Meta:
-        db_table = 'grade'
-        verbose_name_plural = "Grades"
-
-    def __str__(self):
-        return self.title
-
-
 # Term Model
 class Term(models.Model):
     title = models.CharField(max_length=100)
@@ -30,7 +18,6 @@ class Student(models.Model):
     full_name = models.CharField(max_length=100)
     email = models.CharField(max_length=100)
     password = models.CharField(max_length=100)
-    grade = models.ForeignKey(Grade, on_delete=models.CASCADE)
     GPA = models.FloatField(max_length=5)
 
     class Meta:
