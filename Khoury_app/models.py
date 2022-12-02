@@ -71,6 +71,7 @@ class Department(models.Model):
 class Course(models.Model):
     department = models.ForeignKey(Department, on_delete=models.CASCADE)
     name = models.CharField(max_length=150)
+    description = models.TextField(null=True)
     credit = models.IntegerField()
 
     class Meta:
@@ -113,6 +114,7 @@ class TicketStatus(models.Model):
 class Ticket(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     section = models.ForeignKey(Section, on_delete=models.CASCADE)
+    request = models.CharField(max_length=20, null=True)
     created_time = models.DateTimeField(auto_now_add=True)
     status = models.ForeignKey(TicketStatus, on_delete=models.CASCADE)
 
@@ -121,7 +123,7 @@ class Ticket(models.Model):
         verbose_name_plural = "Tickets"
 
     def __str__(self):
-        return f"{self.student}-{self.section}-{self.status}"
+        return f"{self.student}-{self.request}-{self.section}-{self.status}"
 
 
 # Status

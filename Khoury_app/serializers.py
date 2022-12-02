@@ -35,13 +35,13 @@ class DepartmentSerializer(serializers.ModelSerializer):
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Course
-        fields = ['id', 'department', 'name', 'credit']
+        fields = ['id', 'department', 'name', 'description', 'credit']
 
 
 class CourseDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Course
-        fields = ['id', 'department', 'name', 'credit']
+        fields = ['id', 'department', 'name', 'description', 'credit']
         depth = 1
 
 
@@ -67,13 +67,14 @@ class TicketStatusSerializer(serializers.ModelSerializer):
 class TicketSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Ticket
-        fields = ['id', 'student', 'section', 'created_time', 'status']
+        fields = ['id', 'student', 'section', 'request', 'created_time', 'status']
 
 
 class TicketDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Ticket
-        fields = ['id', 'student', 'section', 'created_time', 'status']
+        fields = ['id', 'student', 'section', 'request', 'created_time',
+                  'status']
         depth = 1
 
 

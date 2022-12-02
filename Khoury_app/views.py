@@ -55,7 +55,7 @@ def advisor_login(request):
     try:
         advisorData = models.Advisor.objects.get(email=email,
                                                  password=password)
-    except models.Student.DoesNotExist:
+    except models.Advisor.DoesNotExist:
         advisorData = None
 
     if advisorData:
@@ -80,7 +80,7 @@ def admin_login(request):
     password = request.POST['password']
     try:
         adminData = models.Admin.objects.get(email=email, password=password)
-    except models.Student.DoesNotExist:
+    except models.Admin.DoesNotExist:
         adminData = None
 
     if adminData:
