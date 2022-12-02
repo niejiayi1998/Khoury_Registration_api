@@ -65,9 +65,16 @@ class TicketStatusSerializer(serializers.ModelSerializer):
 
 
 class TicketSerializer(serializers.ModelSerializer):
+    student_id = serializers.ReadOnlyField()
+    student_name = serializers.ReadOnlyField()
+    section_name = serializers.ReadOnlyField()
+    course_name = serializers.ReadOnlyField()
+
     class Meta:
         model = models.Ticket
-        fields = ['id', 'student', 'section', 'request', 'created_time', 'status']
+        fields = ['id', 'student', 'section', 'request', 'created_time',
+                  'status', 'student_id', 'student_name', 'section_name',
+                  'course_name']
 
 
 class TicketDetailSerializer(serializers.ModelSerializer):
@@ -75,7 +82,6 @@ class TicketDetailSerializer(serializers.ModelSerializer):
         model = models.Ticket
         fields = ['id', 'student', 'section', 'request', 'created_time',
                   'status']
-        depth = 1
 
 
 class HistoryStatusSerializer(serializers.ModelSerializer):

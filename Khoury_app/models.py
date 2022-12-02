@@ -122,6 +122,22 @@ class Ticket(models.Model):
         db_table = 'ticket'
         verbose_name_plural = "Tickets"
 
+    @property
+    def student_id(self):
+        return self.student.id
+
+    @property
+    def student_name(self):
+        return self.student.full_name
+
+    @property
+    def section_name(self):
+        return self.section.name
+
+    @property
+    def course_name(self):
+        return self.section.course.name
+
     def __str__(self):
         return f"{self.student}-{self.request}-{self.section}-{self.status}"
 

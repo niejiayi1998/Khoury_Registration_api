@@ -134,6 +134,13 @@ class TicketDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = serializers.TicketDetailSerializer
 
 
+class PendingTicketList(generics.ListAPIView):
+    serializer_class = serializers.TicketSerializer
+
+    def get_queryset(self):
+        return models.Ticket.objects.filter(status=2)
+
+
 class HistoryStatusList(generics.ListCreateAPIView):
     queryset = models.HistoryStatus.objects.all()
     serializer_class = serializers.HistoryStatusSerializer
