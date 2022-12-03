@@ -173,7 +173,7 @@ class Message(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     advisor = models.ForeignKey(Advisor, on_delete=models.CASCADE)
     send_time = models.DateTimeField(auto_now_add=True)
-    content = models.CharField(max_length=500)
+    content = models.TextField()
 
     class Meta:
         db_table = 'message'
