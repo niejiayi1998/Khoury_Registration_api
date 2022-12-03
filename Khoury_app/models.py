@@ -112,7 +112,8 @@ class TicketStatus(models.Model):
 
 # Ticket Model
 class Ticket(models.Model):
-    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE,
+                                related_name="student_id")
     section = models.ForeignKey(Section, on_delete=models.CASCADE)
     request = models.CharField(max_length=20, null=True)
     created_time = models.DateTimeField(auto_now_add=True)
@@ -122,9 +123,9 @@ class Ticket(models.Model):
         db_table = 'ticket'
         verbose_name_plural = "Tickets"
 
-    @property
-    def student_id(self):
-        return self.student.id
+    # @property
+    # def student_id(self):
+    #     return self.student.id
 
     @property
     def student_name(self):

@@ -65,7 +65,6 @@ class TicketStatusSerializer(serializers.ModelSerializer):
 
 
 class TicketSerializer(serializers.ModelSerializer):
-    student_id = serializers.ReadOnlyField()
     student_name = serializers.ReadOnlyField()
     section_name = serializers.ReadOnlyField()
     course_name = serializers.ReadOnlyField()
@@ -73,7 +72,7 @@ class TicketSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Ticket
         fields = ['id', 'student', 'section', 'request', 'created_time',
-                  'status', 'student_id', 'student_name', 'section_name',
+                  'status', 'student_name', 'section_name',
                   'course_name']
 
 
