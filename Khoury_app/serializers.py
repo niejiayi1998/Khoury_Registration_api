@@ -42,20 +42,22 @@ class CourseDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Course
         fields = ['id', 'department', 'name', 'description', 'credit']
-        depth = 1
 
 
 class SectionSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Section
-        fields = ['id', 'course', 'name', 'instructor', 'classSize', 'term']
+        fields = ['id', 'course', 'name', 'instructor', 'classSize',
+                  'location', 'term']
 
 
 class SectionDetailSerializer(serializers.ModelSerializer):
+    course_name = serializers.ReadOnlyField()
+    term_name = serializers.ReadOnlyField()
     class Meta:
         model = models.Section
-        fields = ['id', 'course', 'name', 'instructor', 'classSize', 'term']
-        depth = 1
+        fields = ['id', 'course', 'name', 'instructor', 'classSize', 'location',
+                  'term', 'course_name', 'term_name']
 
 
 class TicketStatusSerializer(serializers.ModelSerializer):
@@ -106,7 +108,7 @@ class HistoryDetailSerializer(serializers.ModelSerializer):
 class MessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Message
-        fields = ['id', 'student', 'advisor', 'send_time', 'content']
+        fields = ['id', 'student', 'advisor', 'send_time', 'content', 'advisor_name']
 
 
 class MessageDetailSerializer(serializers.ModelSerializer):

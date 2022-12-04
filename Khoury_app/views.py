@@ -164,3 +164,12 @@ class MessageList(generics.ListCreateAPIView):
 class MessageDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Message.objects.all()
     serializer_class = serializers.MessageDetailSerializer
+
+
+class MessageToStudent(generics.ListAPIView):
+    serializer_class = serializers.MessageSerializer
+
+    def get_queryset(self):
+        student_id = self.kwargs['student_id']
+        student = models.Student.objects.get(pk=student_id)
+        return models.Message.objects.filter(student=student)

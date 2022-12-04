@@ -88,11 +88,20 @@ class Section(models.Model):
     name = models.CharField(max_length=1)
     instructor = models.CharField(max_length=150)
     classSize = models.IntegerField()
+    location = models.CharField(max_length=50, null=True)
     term = models.ForeignKey(Term, on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'section'
         verbose_name_plural = "Sections"
+
+    @property
+    def course_name(self):
+        return self.course.name
+
+    @property
+    def term_name(self):
+        return self.term.title
 
     def __str__(self):
         return f"{self.course}-{self.name}-{self.term}"
@@ -112,8 +121,7 @@ class TicketStatus(models.Model):
 
 # Ticket Model
 class Ticket(models.Model):
-    student = models.ForeignKey(Student, on_delete=models.CASCADE,
-                                related_name="student_id")
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
     section = models.ForeignKey(Section, on_delete=models.CASCADE)
     request = models.CharField(max_length=20, null=True)
     created_time = models.DateTimeField(auto_now_add=True)
@@ -179,6 +187,10 @@ class Message(models.Model):
     class Meta:
         db_table = 'message'
         verbose_name_plural = "Messages"
+
+    @property
+    def advisor_name(self):
+        return self.advisor.full_name
 
     def __str__(self):
         return f"{self.student}-{self.advisor}-{self.send_time}"

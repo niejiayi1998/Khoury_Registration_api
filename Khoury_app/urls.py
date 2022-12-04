@@ -39,4 +39,6 @@ urlpatterns = [
     # message url
     path('message/', views.MessageList.as_view()),
     path('message/<int:pk>', views.MessageDetail.as_view()),
+    path('message-to-student/<int:student_id>',
+         views.MessageToStudent.as_view()),
 ]
