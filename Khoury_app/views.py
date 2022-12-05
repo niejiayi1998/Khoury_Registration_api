@@ -7,6 +7,9 @@ from . import models
 
 
 # Create your views here.
+from .serializers import SectionSerializer
+
+
 class TermList(generics.ListCreateAPIView):
     queryset = models.Term.objects.all()
     serializer_class = serializers.TermSerializer
@@ -173,3 +176,13 @@ class MessageToStudent(generics.ListAPIView):
         student_id = self.kwargs['student_id']
         student = models.Student.objects.get(pk=student_id)
         return models.Message.objects.filter(student=student).order_by('-send_time')
+
+
+# Specific Course Chapter List
+class CourseSectionList(generics.ListCreateAPIView):
+    serializer_class = SectionSerializer
+
+    def get_queryset(self):
+        course_id = self.kwargs['course_id']
+        course = models.Course.objects.get(pk=course_id)
+        return models.Section.objects.filter(course=course)
