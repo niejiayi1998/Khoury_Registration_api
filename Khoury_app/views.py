@@ -172,4 +172,4 @@ class MessageToStudent(generics.ListAPIView):
     def get_queryset(self):
         student_id = self.kwargs['student_id']
         student = models.Student.objects.get(pk=student_id)
-        return models.Message.objects.filter(student=student)
+        return models.Message.objects.filter(student=student).order_by('-send_time')

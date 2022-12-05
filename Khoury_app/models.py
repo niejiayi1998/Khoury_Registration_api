@@ -71,6 +71,7 @@ class Department(models.Model):
 class Course(models.Model):
     department = models.ForeignKey(Department, on_delete=models.CASCADE)
     name = models.CharField(max_length=150)
+    title = models.CharField(max_length=20, null=True)
     description = models.TextField(null=True)
     credit = models.IntegerField()
 

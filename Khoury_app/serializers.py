@@ -35,13 +35,13 @@ class DepartmentSerializer(serializers.ModelSerializer):
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Course
-        fields = ['id', 'department', 'name', 'description', 'credit']
+        fields = ['id', 'department', 'title', 'name', 'description', 'credit']
 
 
 class CourseDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Course
-        fields = ['id', 'department', 'name', 'description', 'credit']
+        fields = ['id', 'department', 'title', 'name', 'description', 'credit']
 
 
 class SectionSerializer(serializers.ModelSerializer):
