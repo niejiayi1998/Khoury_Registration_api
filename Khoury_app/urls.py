@@ -26,6 +26,7 @@ urlpatterns = [
     path('section/<int:pk>/', views.SectionDetail.as_view()),
     # Specific Course Chapters
     path("course-sections/<int:course_id>", views.CourseSectionList.as_view()),
+    path('my-course/<int:student_id>/', views.MyCourseList.as_view()),
 
     # ticket url
     path('ticket-status/', views.TicketStatusList.as_view()),
@@ -37,10 +38,12 @@ urlpatterns = [
     path('history-status/', views.HistoryStatusList.as_view()),
     path('history/', views.HistoryList.as_view()),
     path('history/<int:pk>/', views.HistoryDetail.as_view()),
+    path('find-historyId/<int:student_id>/<int:section_id>',
+         views.find_historyId),
 
     # message url
     path('message/', views.MessageList.as_view()),
-    path('message/<int:pk>', views.MessageDetail.as_view()),
+    path('message/<int:pk>/', views.MessageDetail.as_view()),
     path('message-to-student/<int:student_id>',
          views.MessageToStudent.as_view()),
 ]

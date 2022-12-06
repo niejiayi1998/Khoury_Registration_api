@@ -5,7 +5,6 @@ from django.http import JsonResponse, HttpResponse
 from . import serializers
 from . import models
 
-
 # Create your views here.
 from .serializers import SectionSerializer
 
@@ -175,14 +174,51 @@ class MessageToStudent(generics.ListAPIView):
     def get_queryset(self):
         student_id = self.kwargs['student_id']
         student = models.Student.objects.get(pk=student_id)
-        return models.Message.objects.filter(student=student).order_by('-send_time')
+        return models.Message.objects.filter(student=student).order_by(
+            '-send_time')
 
 
 # Specific Course Chapter List
 class CourseSectionList(generics.ListCreateAPIView):
-    serializer_class = SectionSerializer
+    serializer_class = serializers.SectionSerializer
 
     def get_queryset(self):
         course_id = self.kwargs['course_id']
         course = models.Course.objects.get(pk=course_id)
         return models.Section.objects.filter(course=course)
+
+
+# fetch student section enroll status
+# @csrf_exempt
+# def fetch_enroll_status(request, student_id, course_id):
+#     student = models.Student.objects.filter(id=student_id).first()
+#     course = models.Course.objects.filter(id=course_id).first()
+#     enrollStatus = models.History.objects.filter(course=course,
+#                                                  student=student)
+#
+#     if enrollStatus:
+#         return JsonResponse({'bool': True})
+#     else:
+#         return JsonResponse({'bool': False})
+
+
+@csrf_exempt
+def find_historyId(request, student_id, section_id):
+    student = models.Student.objects.filter(id=student_id).first()
+    section = models.Section.objects.filter(id=section_id).first()
+    status = models.HistoryStatus.objects.filter(id=2).first()
+    historyId = models.History.objects.filter(student=student,
+                                              section=section,
+                                              status=status).first().id
+    return JsonResponse({'historyId': historyId})
+
+
+# find student dashboard myCourse (current registered course)
+class MyCourseList(generics.ListAPIView):
+    serializer_class = serializers.HistorySerializer
+
+    def get_queryset(self):
+        student_id = self.kwargs['student_id']
+        student = models.Student.objects.get(pk=student_id)
+        status = models.HistoryStatus.objects.get(pk=2)
+        return models.History.objects.filter(student=student, status=status)

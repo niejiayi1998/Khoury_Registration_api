@@ -92,9 +92,14 @@ class HistoryStatusSerializer(serializers.ModelSerializer):
 
 
 class HistorySerializer(serializers.ModelSerializer):
+    course = serializers.ReadOnlyField()
+    instructor = serializers.ReadOnlyField()
+    section_name = serializers.ReadOnlyField()
+
     class Meta:
         model = models.History
-        fields = ['id', 'student', 'section', 'status']
+        fields = ['id', 'student', 'section', 'status', 'course', 'instructor'
+                  , 'section_name']
 
 
 

@@ -174,6 +174,18 @@ class History(models.Model):
         db_table = 'history'
         verbose_name_plural = "Histories"
 
+    @property
+    def course(self):
+        return self.section.course.name
+
+    @property
+    def instructor(self):
+        return self.section.instructor
+
+    @property
+    def section_name(self):
+        return self.section.name
+
     def __str__(self):
         return f"{self.student}-{self.section}-{self.status}"
 
