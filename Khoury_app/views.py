@@ -188,18 +188,27 @@ class CourseSectionList(generics.ListCreateAPIView):
         return models.Section.objects.filter(course=course)
 
 
-# fetch student section enroll status
-# @csrf_exempt
-# def fetch_enroll_status(request, student_id, course_id):
-#     student = models.Student.objects.filter(id=student_id).first()
-#     course = models.Course.objects.filter(id=course_id).first()
-#     enrollStatus = models.History.objects.filter(course=course,
-#                                                  student=student)
-#
-#     if enrollStatus:
-#         return JsonResponse({'bool': True})
-#     else:
-#         return JsonResponse({'bool': False})
+# fetch student course enroll status
+@csrf_exempt
+def fetch_enroll_status(request, student_id, course_id):
+    student = models.Student.objects.filter(id=student_id).first()
+    course = models.Course.objects.filter(id=course_id).first()
+    section = models.Section.objects.filter(course=course)
+
+    for s in section:
+        enrollStatus = models.History.objects.filter(student=student,
+                                                     section=s).count()
+        if enrollStatus:
+            return JsonResponse({'bool': True})
+
+    return JsonResponse({'bool': False})
+
+
+
+    if enrollStatus:
+        return JsonResponse({'bool': True})
+    else:
+        return JsonResponse({'bool': False})
 
 
 @csrf_exempt
