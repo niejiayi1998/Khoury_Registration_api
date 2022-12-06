@@ -233,3 +233,18 @@ class MyCourseList(generics.ListAPIView):
         student = models.Student.objects.get(pk=student_id)
         status = models.HistoryStatus.objects.get(pk=2)
         return models.History.objects.filter(student=student, status=status)
+
+
+
+@csrf_exempt
+def find_drop_ticket(request, student_id, section_id):
+    student = models.Student.objects.filter(id=student_id).first()
+    section = models.Section.objects.filter(id=section_id).first()
+    status = models.TicketStatus.objects.filter(id=2).first()
+    ticket = models.Ticket.objects.filter(student=student,
+                                              section=section,
+                                              status=status).count()
+    if ticket:
+        return JsonResponse({'bool': True})
+    else:
+        return JsonResponse({'bool': False})

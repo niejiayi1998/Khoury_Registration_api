@@ -36,6 +36,8 @@ urlpatterns = [
     path('ticket/', views.TicketList.as_view()),
     path('ticket/<int:pk>/', views.TicketDetail.as_view()),
     path('ticket/pending/', views.PendingTicketList.as_view()),
+    path('drop-ticket/<int:student_id>/<int:section_id>',
+         views.find_drop_ticket),
 
     # history url
     path('history-status/', views.HistoryStatusList.as_view()),
