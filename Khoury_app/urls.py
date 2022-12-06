@@ -25,7 +25,8 @@ urlpatterns = [
     path('section/', views.SectionList.as_view()),
     path('section/<int:pk>/', views.SectionDetail.as_view()),
     # Specific Course Chapters
-    path("course-sections/<int:course_id>", views.CourseSectionList.as_view()),
+    path("course-sections/<int:course_id>/<int:term_id>",
+         views.CourseSectionList.as_view()),
     path('my-course/<int:student_id>/', views.MyCourseList.as_view()),
     path('fetch-enroll-status/<int:student_id>/<int:course_id>',
          views.fetch_enroll_status),

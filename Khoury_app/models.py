@@ -75,6 +75,10 @@ class Course(models.Model):
     description = models.TextField(null=True)
     credit = models.IntegerField()
 
+    @property
+    def department_name(self):
+        return self.department.name
+
     class Meta:
         db_table = 'course'
         verbose_name_plural = "Courses"

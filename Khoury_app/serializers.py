@@ -39,9 +39,12 @@ class CourseSerializer(serializers.ModelSerializer):
 
 
 class CourseDetailSerializer(serializers.ModelSerializer):
+    department_name = serializers.ReadOnlyField()
+
     class Meta:
         model = models.Course
-        fields = ['id', 'department', 'title', 'name', 'description', 'credit']
+        fields = ['id', 'department', 'title', 'name', 'description',
+                  'credit', 'department_name']
 
 
 class SectionSerializer(serializers.ModelSerializer):

@@ -184,8 +184,10 @@ class CourseSectionList(generics.ListCreateAPIView):
 
     def get_queryset(self):
         course_id = self.kwargs['course_id']
+        term_id = self.kwargs['term_id']
         course = models.Course.objects.get(pk=course_id)
-        return models.Section.objects.filter(course=course)
+        term = models.Term.objects.get(pk=term_id)
+        return models.Section.objects.filter(course=course, term=term)
 
 
 # fetch student course enroll status
