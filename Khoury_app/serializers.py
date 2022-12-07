@@ -15,9 +15,11 @@ class StudentSerializer(serializers.ModelSerializer):
 
 
 class AdvisorSerializer(serializers.ModelSerializer):
+    department_name = serializers.ReadOnlyField()
+
     class Meta:
         model = models.Advisor
-        fields = ['id', 'full_name', 'email', 'password']
+        fields = ['id', 'department', 'full_name', 'email', 'password', 'department_name']
 
 
 class AdminSerializer(serializers.ModelSerializer):

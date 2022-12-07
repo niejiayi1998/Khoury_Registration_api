@@ -13,6 +13,18 @@ class Term(models.Model):
         return self.title
 
 
+# Department Model
+class Department(models.Model):
+    name = models.CharField(max_length=150)
+
+    class Meta:
+        db_table = 'department'
+        verbose_name_plural = "Departments"
+
+    def __str__(self):
+        return self.name
+
+
 # Student Model
 class Student(models.Model):
     full_name = models.CharField(max_length=100)
@@ -31,8 +43,14 @@ class Student(models.Model):
 # Advisor Model
 class Advisor(models.Model):
     full_name = models.CharField(max_length=100)
+    department = models.ForeignKey(Department, on_delete=models.CASCADE,
+                                   null=True)
     email = models.CharField(max_length=100)
     password = models.CharField(max_length=100)
+
+    @property
+    def department_name(self):
+        return self.department.name
 
     class Meta:
         db_table = 'advisor'
@@ -53,18 +71,6 @@ class Admin(models.Model):
 
     def __str__(self):
         return self.full_name
-
-
-# Department Model
-class Department(models.Model):
-    name = models.CharField(max_length=150)
-
-    class Meta:
-        db_table = 'department'
-        verbose_name_plural = "Departments"
-
-    def __str__(self):
-        return self.name
 
 
 # Course Model
