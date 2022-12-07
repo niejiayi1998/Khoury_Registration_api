@@ -206,13 +206,6 @@ def fetch_enroll_status(request, student_id, course_id):
     return JsonResponse({'bool': False})
 
 
-
-    if enrollStatus:
-        return JsonResponse({'bool': True})
-    else:
-        return JsonResponse({'bool': False})
-
-
 @csrf_exempt
 def find_historyId(request, student_id, section_id):
     student = models.Student.objects.filter(id=student_id).first()
@@ -235,7 +228,6 @@ class MyCourseList(generics.ListAPIView):
         return models.History.objects.filter(student=student, status=status)
 
 
-
 @csrf_exempt
 def find_drop_ticket(request, student_id, section_id):
     student = models.Student.objects.filter(id=student_id).first()
@@ -251,14 +243,17 @@ def find_drop_ticket(request, student_id, section_id):
 
 
 @csrf_exempt
-def find_enroll_ticket(request, student_id, section_id):
+def find_enroll_ticket(request, student_id, course_id):
     student = models.Student.objects.filter(id=student_id).first()
-    section = models.Section.objects.filter(id=section_id).first()
+    course = models.Course.objects.filter(id=course_id).first()
+    section = models.Section.objects.filter(course=course)
     status = models.TicketStatus.objects.filter(id=2).first()
-    ticket = models.Ticket.objects.filter(student=student, section=section,
-                                          request="ENROLL",
-                                          status=status).count()
-    if ticket:
-        return JsonResponse({'bool': True})
-    else:
-        return JsonResponse({'bool': False})
+
+    for s in section:
+        enrollStatus = models.Ticket.objects.filter(student=student, section=s,
+                                                    request="ENROLL",
+                                                    status=status).count()
+        if enrollStatus:
+            return JsonResponse({'bool': True})
+
+    return JsonResponse({'bool': False})
