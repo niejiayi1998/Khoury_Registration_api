@@ -48,10 +48,12 @@ class CourseDetailSerializer(serializers.ModelSerializer):
 
 
 class SectionSerializer(serializers.ModelSerializer):
+    total_enrolled_students = serializers.ReadOnlyField()
+
     class Meta:
         model = models.Section
         fields = ['id', 'course', 'name', 'instructor', 'classSize',
-                  'location', 'term']
+                  'location', 'term', 'total_enrolled_students']
 
 
 class SectionDetailSerializer(serializers.ModelSerializer):

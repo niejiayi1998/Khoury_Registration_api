@@ -108,6 +108,11 @@ class Section(models.Model):
     def term_name(self):
         return self.term.title
 
+    def total_enrolled_students(self):
+        total_enrolled_students = History.objects.filter(
+            section=self).count()
+        return total_enrolled_students
+
     def __str__(self):
         return f"{self.course}-{self.name}-{self.term}"
 
